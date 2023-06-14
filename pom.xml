@@ -230,7 +230,7 @@
         <repository>
           <id>github</id>
           <name>GitHub Packages</name>
-          <url>https://maven.pkg.github.com/teragrep/pth_10</url>
+          <url>https://maven.pkg.github.com/teragrep/rlo_14</url>
         </repository>
       </distributionManagement>
     </profile>
