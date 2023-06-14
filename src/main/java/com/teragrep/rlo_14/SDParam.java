@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cloudbees.syslog;
+package com.teragrep.rlo_14;
 
 import java.io.Serializable;
 import java.util.Objects;

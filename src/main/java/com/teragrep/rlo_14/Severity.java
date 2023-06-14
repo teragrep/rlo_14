@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cloudbees.syslog;
+package com.teragrep.rlo_14;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
-import edu.umd.cs.findbugs.annotations.Nullable;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -72,10 +70,9 @@ public enum Severity {
     }
 
     private final int numericalCode;
-    @NonNull
     private final String label;
 
-    Severity(int numericalCode, @NonNull String label) {
+    Severity(int numericalCode, String label) {
         this.numericalCode = numericalCode;
         this.label = label;
     }
@@ -98,8 +95,7 @@ public enum Severity {
      * @return Syslog severity, {@code null} if given value is {@code null}
      * @throws IllegalArgumentException the given value is not a valid Syslog severity textual code
      */
-    @Nullable
-    public static Severity fromLabel(@Nullable String label) throws IllegalArgumentException {
+    public static Severity fromLabel(String label) throws IllegalArgumentException {
         if (label == null || label.isEmpty())
             return null;
 
@@ -120,7 +116,6 @@ public enum Severity {
     /**
      * Syslog severity textual code. Not {@code null}.
      */
-    @NonNull
     public String label() {
         return label;
     }

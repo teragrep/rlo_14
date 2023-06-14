@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cloudbees.syslog;
+package com.teragrep.rlo_14;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
-import edu.umd.cs.findbugs.annotations.Nullable;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -145,10 +143,9 @@ public enum Facility implements Comparable<Facility> {
     /**
      * Syslog facility textual code. Not {@code null}
      */
-    @NonNull
     private final String label;
 
-    Facility(int numericalCode, @NonNull String label) {
+    Facility(int numericalCode, String label) {
         this.numericalCode = numericalCode;
         this.label = label;
     }
@@ -158,7 +155,6 @@ public enum Facility implements Comparable<Facility> {
      * @return Syslog facility, not {@code null}
      * @throws IllegalArgumentException the given numericalCode is not a valid Syslog facility numerical code
      */
-    @NonNull
     public static Facility fromNumericalCode(int numericalCode) throws IllegalArgumentException {
         Facility facility = facilityFromNumericalCode.get(numericalCode);
         if (facility == null) {
@@ -172,7 +168,6 @@ public enum Facility implements Comparable<Facility> {
      * @return Syslog facility, {@code null} if given value is {@code null}
      * @throws IllegalArgumentException the given value is not a valid Syslog facility textual code
      */
-    @Nullable
     public static Facility fromLabel(String label) throws IllegalArgumentException {
         if (label == null || label.isEmpty())
             return null;

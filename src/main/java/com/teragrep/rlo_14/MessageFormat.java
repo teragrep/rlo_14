@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cloudbees.syslog;
+package com.teragrep.rlo_14;
 
 /**
  * Format of the Syslog message.
@@ -21,16 +21,5 @@ package com.cloudbees.syslog;
  * @author <a href="mailto:cleclerc@cloudbees.com">Cyrille Le Clerc</a>
  */
 public enum MessageFormat {
-    /**
-     * <a href="http://tools.ietf.org/html/rfc3164">RFC 3614 - BSD syslog Protocol</a>
-     */
-    RFC_3164,
-    /**
-     * <a href="https://tools.ietf.org/html/rfc5424">RFC 5424 - The Syslog Protocol</a>
-     */
-    RFC_5424,
-    /**
-     * <a href="https://tools.ietf.org/html/rfc5425">RFC 5425 - Transport Layer Security (TLS) Transport Mapping for Syslog</a>
-     */
-    RFC_5425
+    RFC_5424
 }

@@ -1,316 +1,238 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2013, CloudBees Inc.
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
+~ Copyright 2013, CloudBees Inc.
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.cloudbees</groupId>
-    <artifactId>syslog-java-client</artifactId>
-    <version>1.1.8-SNAPSHOT</version>
-    <packaging>bundle</packaging>
-
-    <name>syslog-java-client</name>
-    <description>Syslog Java Client</description>
-    <url>https://github.com/jenkinsci/syslog-java-client/</url>
-    <inceptionYear>2014</inceptionYear>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Cyrille Le Clerc</name>
-            <email>cleclerc@cloudbees.com</email>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:git://github.com/jenkinsci/syslog-java-client.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/syslog-java-client.git</developerConnection>
-        <tag>HEAD</tag>
-        <url>https://github.com/jenkinsci/syslog-java-client/</url>
-    </scm>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs-annotations</artifactId>
-            <version>4.7.3</version>
-            <optional>true</optional>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>jsr305</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-            <version>1.0</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.5.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.1.2</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.teragrep</groupId>
+  <artifactId>rlo_14</artifactId>
+  <version>${revision}${sha1}${changelist}</version>
+  <packaging>jar</packaging>
+  <name>rlo_14</name>
+  <description>Syslog Java Client</description>
+  <url>https://github.com/jenkinsci/syslog-java-client/</url>
+  <inceptionYear>2014</inceptionYear>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <revision>0.0.1</revision>
+    <changelist>-SNAPSHOT</changelist>
+    <sha1/>
+    <junit.version>5.10.0-M1</junit.version>
+  </properties>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Cyrille Le Clerc</name>
+      <email>cleclerc@cloudbees.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/teragrep/rlo_14.git</connection>
+    <developerConnection>scm:git:git@github.com:teragrep/rlo_14.git</developerConnection>
+    <url>https://github.com/teragrep/rlo_14/tree/master</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+      <version>${junit.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>0.15</version>
+        <inherited>false</inherited>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <addDefaultLicenseMatchers>false</addDefaultLicenseMatchers>
+          <licenses>
+            <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
+              <notes>Also allow the license url to be https.</notes>
+              <patterns>
+                <pattern>Licensed under the Apache License, Version 2.0</pattern>
+              </patterns>
+            </license>
+          </licenses>
+          <consoleOutput>true</consoleOutput>
+          <excludeSubProjects>false</excludeSubProjects>
+          <excludes>
+            <!-- git -->
+            <exclude>.git/**</exclude>
+            <exclude>.gitattributes</exclude>
+            <exclude>.gitignore</exclude>
+            <exclude>.gitmodules</exclude>
+            <!-- ci -->
+            <exclude>.github/workflows/*.yml</exclude>
+            <exclude>.github/workflows/*.yaml</exclude>
+            <exclude>toolchains.xml</exclude>
+            <exclude>settings.xml</exclude>
+            <exclude>rpm/rpm.pom.xml</exclude>
+            <!-- readme -->
+            <exclude>README.adoc</exclude>
+            <exclude>README.md</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <skip>false</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
+        <configuration>
+          <parallel>all</parallel>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <source>8</source>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>publish-maven-central</id>
+      <build>
         <plugins>
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.3.4</version>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
                 <configuration>
-                    <threshold>High</threshold>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>spotbugs</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <phase>verify</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.9</version>
-                <extensions>true</extensions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>display-info</id>
-                        <goals>
-                            <goal>display-info</goal>
-                            <goal>enforce</goal>
-                        </goals>
-                        <phase>validate</phase>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion>
-                                    <version>[3.8.1,)</version>
-                                    <message>3.8.1 required to no longer download dependencies via HTTP (use HTTPS instead).</message>
-                                </requireMavenVersion>
-                                <requireJavaVersion>
-                                    <version>[1.8.0,]</version>
-                                </requireJavaVersion>
-                                <bannedDependencies>
-                                    <excludes>
-                                        <!-- CVE-2021-44228 -->
-                                        <exclude>org.apache.logging.log4j:*:(,2.15.0-rc1]</exclude>
-                                    </excludes>
-                                </bannedDependencies>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doclint>all,-missing,-reference</doclint>
-                    <locale>en_US</locale>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <useReleaseProfile>false</useReleaseProfile>
-                    <releaseProfiles>jenkins-release</releaseProfiles>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.13</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>sonatype-nexus-staging</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
-    </build>
-    <profiles>
-        <profile>
-            <id>jdk-8-and-below</id>
-            <activation>
-                <jdk>(,1.8]</jdk>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <source>1.8</source>
-                            <target>1.8</target>
-                            <testSource>1.8</testSource>
-                            <testTarget>1.8</testTarget>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <source>1.8</source>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>jdk-9-and-above</id>
-            <activation>
-                <jdk>[9,)</jdk>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <release>8</release>
-                            <testRelease>8</testRelease>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <release>8</release>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>jenkins-release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <phase>verify</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>network-constrained</id>
-            <activation>
-                <property>
-                    <name>env.CI</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <exclude>com.cloudbees.syslog.sender.TcpSyslogMessageSenderTest</exclude>
-                            </excludes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+      </build>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+          <id>ossrh</id>
+          <name>Central Repository OSSRH</name>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>publish-github-packages</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <distributionManagement>
+        <repository>
+          <id>github</id>
+          <name>GitHub Packages</name>
+          <url>https://maven.pkg.github.com/teragrep/pth_10</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+  </profiles>
 </project>
