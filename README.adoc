@@ -1,0 +1,90 @@
+= Syslog Java Client
+
+== Description
+
+Java RFC5424 formatter library
+
+== Using the Syslog Java Client with Maven
+
+Add the following dependency in your pom.xml:
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.teragrep</groupId>
+    <artifactId>rlo_14</artifactId>
+    <version>1.0.0</version>
+</dependency>
+----
+
+== Usage
+
+Sourcing timestamp from long
+[source,java]
+----
+Calendar cal = Calendar.getInstance();
+cal.set(2013, Calendar.DECEMBER, 5, 10, 30, 5);
+cal.set(Calendar.MILLISECOND, 0);
+SyslogMessage message = new SyslogMessage()
+       .withTimestamp(cal.getTimeInMillis())
+       .withAppName("my_app")
+       .withHostname("localhost")
+       .withFacility(Facility.USER)
+       .withSeverity(Severity.INFORMATIONAL)
+       .withMsg("a syslog message");
+String actual = message.toRfc5424SyslogMessage();
+----
+
+Sourcing timestamp from Date
+[source,java]
+----
+Calendar cal = Calendar.getInstance();
+cal.set(2013, Calendar.DECEMBER, 5, 10, 30, 5);
+cal.set(Calendar.MILLISECOND, 0);
+SyslogMessage message = new SyslogMessage()
+        .withTimestamp(cal.getTime())
+       .withAppName("my_app")
+       .withHostname("localhost")
+       .withFacility(Facility.USER)
+       .withSeverity(Severity.INFORMATIONAL)
+       .withMsg("a syslog message");
+String actual = message.toRfc5424SyslogMessage();
+----
+
+Sourcing timestamp (passing it as-is) from string
+[source,java]
+----
+Calendar cal = Calendar.getInstance();
+cal.set(2013, Calendar.DECEMBER, 5, 10, 30, 5);
+cal.set(Calendar.MILLISECOND, 0);
+SyslogMessage message = new SyslogMessage()
+       .withTimestamp("2023-06-14T16:37:00.000Z")
+       .withAppName("my_app")
+       .withHostname("localhost")
+       .withFacility(Facility.USER)
+       .withSeverity(Severity.INFORMATIONAL)
+       .withMsg("a syslog message");
+String actual = message.toRfc5424SyslogMessage();
+----
+
+Adding structured data
+
+[source,java]
+----
+SyslogMessage message = new SyslogMessage()
+        .withTimestamp("2023-06-14T16:37:00.000Z")
+        .withAppName("my_app")
+        .withHostname("localhost")
+        .withFacility(Facility.USER)
+        .withSeverity(Severity.INFORMATIONAL)
+        .withMsg("a syslog message")
+        .withSDElement(
+                new SDElement(
+                        "exampleSDID@32473",
+                        new SDParam("iut", "3"),
+                        new SDParam("eventSource", "Application"),
+                        new SDParam("eventID", "1011")
+                )
+        );
+String actual = message.toRfc5424SyslogMessage();
+----
