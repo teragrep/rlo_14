@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 package com.teragrep.rlo_14;
-import java.io.CharArrayWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.Instant;
+import java.util.*;
 
 /**
  * Syslog message as defined in <a href="https://tools.ietf.org/html/rfc5424">RFC 5424 - The Syslog Protocol</a>.
@@ -78,22 +76,37 @@ public class SyslogMessage {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = rfc3339Formatter.format(timestamp);
+    public void setTimestamp(long timestamp) {
+        this.timestamp = Instant.ofEpochMilli(timestamp).toString();
+    }
+
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp.toString();
+    }
+
+    public void setTimestamp(String timestamp, boolean skipParse) {
+        if (skipParse) {
+            this.timestamp = timestamp;
+        }
+        else {
+            this.timestamp = Instant.parse(timestamp).toString();
+        }
     }
 
     public SyslogMessage withTimestamp(long timestamp) {
-        this.timestamp = rfc3339Formatter.format(new Date(timestamp));
+        setTimestamp(timestamp);
         return this;
     }
-
-    public SyslogMessage withTimestamp(Date timestamp) {
-        this.timestamp = rfc3339Formatter.format(timestamp);
+    public SyslogMessage withTimestamp(Instant timestamp) {
+        setTimestamp(timestamp);
         return this;
     }
-
     public SyslogMessage withTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+        setTimestamp(timestamp, false);
+        return this;
+    }
+    public SyslogMessage withTimestamp(String timestamp, boolean skipParse) {
+        setTimestamp(timestamp, skipParse);
         return this;
     }
 
@@ -176,7 +189,7 @@ public class SyslogMessage {
     
     public SyslogMessage withSDElement(SDElement sde) {
         if (sdElements == null) {
-            sdElements = new HashSet<>();
+            sdElements = new LinkedHashSet<>();
         }
         sdElements.add(sde);
         return this;
