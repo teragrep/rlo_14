@@ -1,5 +1,6 @@
 /*
  * Copyright 2010-2014, CloudBees Inc.
+ * Copyright 2023, Suomen Kanuuna Oy
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +26,7 @@ import java.util.*;
  * Also compatible with <a href="http://tools.ietf.org/html/rfc3164">RFC-3164: The BSD syslog Protocol</a>,
  *
  * @author <a href="mailto:cleclerc@cloudbees.com">Cyrille Le Clerc</a>
+ * @author <a href="mailto:9@teragrep.com">StrongestNumber9</a>
  */
 public class SyslogMessage {
     public final static String SP = " ";

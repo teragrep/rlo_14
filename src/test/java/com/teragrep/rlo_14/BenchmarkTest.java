@@ -17,92 +17,77 @@
 
 package com.teragrep.rlo_14;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Warmup;
 
 import java.time.Instant;
 
-@EnabledIfSystemProperty(named="benchmark", matches="true")
 public class BenchmarkTest {
-    @Test
+    public static void main(String[] args) throws Exception {
+        org.openjdk.jmh.Main.main(args);
+    }
+
+    @Benchmark
+    @Fork(value=1, warmups=1)
+    @Warmup(iterations=1, time=5)
+    @Measurement(iterations=5, time=5)
     public void testBenchmarkStringTimestamp() {
-        long start = System.nanoTime();
-        int events = 10_000_000;
-        for(int i=0; i<events; i++) {
-            SyslogMessage message = new SyslogMessage()
-                    .withTimestamp("2023-06-14T16:37:00.000Z")
-                    .withAppName("my_app")
-                    .withHostname("localhost")
-                    .withFacility(Facility.USER)
-                    .withSeverity(Severity.INFORMATIONAL)
-                    .withMsg("a syslog message");
-            String actual = message.toRfc5424SyslogMessage();
-        }
-        long end = System.nanoTime();
-        long elapsed = end - start;
-        printData((double) elapsed / 1_000_000_000, events, "String Timestamp");
+        String message = new SyslogMessage()
+            .withTimestamp("2023-06-14T16:37:00.000Z")
+            .withAppName("my_app")
+            .withHostname("localhost")
+            .withFacility(Facility.USER)
+            .withSeverity(Severity.INFORMATIONAL)
+            .withMsg("a syslog message")
+            .toRfc5424SyslogMessage();
     }
 
-    @Test
+    @Benchmark
+    @Fork(value=1, warmups=1)
+    @Warmup(iterations=1, time=5)
+    @Measurement(iterations=5, time=5)
     public void testBenchmarkStringTimestampSkipParse() {
-        long start = System.nanoTime();
-        int events = 10_000_000;
-        for(int i=0; i<events; i++) {
-            SyslogMessage message = new SyslogMessage()
-                    .withTimestamp("2023-06-14T16:37:00.000Z", true)
-                    .withAppName("my_app")
-                    .withHostname("localhost")
-                    .withFacility(Facility.USER)
-                    .withSeverity(Severity.INFORMATIONAL)
-                    .withMsg("a syslog message");
-            String actual = message.toRfc5424SyslogMessage();
-        }
-        long end = System.nanoTime();
-        long elapsed = end - start;
-        printData((double) elapsed / 1_000_000_000, events, "String skipParse Timestamp");
+        String message = new SyslogMessage()
+            .withTimestamp("2023-06-14T16:37:00.000Z", true)
+            .withAppName("my_app")
+            .withHostname("localhost")
+            .withFacility(Facility.USER)
+            .withSeverity(Severity.INFORMATIONAL)
+            .withMsg("a syslog message")
+            .toRfc5424SyslogMessage();
     }
 
-    @Test
+    @Benchmark
+    @Fork(value=1, warmups=1)
+    @Warmup(iterations=1, time=5)
+    @Measurement(iterations=5, time=5)
     public void testBenchmarkLongTimestamp() {
-        long start = System.nanoTime();
-        int events = 10_000_000;
         long time = Instant.now().toEpochMilli();
-        for(int i=0; i<events; i++) {
-            SyslogMessage message = new SyslogMessage()
-                    .withTimestamp(time)
-                    .withAppName("my_app")
-                    .withHostname("localhost")
-                    .withFacility(Facility.USER)
-                    .withSeverity(Severity.INFORMATIONAL)
-                    .withMsg("a syslog message");
-            String actual = message.toRfc5424SyslogMessage();
-        };
-        long end = System.nanoTime();
-        long elapsed = end - start;
-        printData((double) elapsed / 1_000_000_000, events, "Long Timestamp");
+        String message = new SyslogMessage()
+            .withTimestamp(time)
+            .withAppName("my_app")
+            .withHostname("localhost")
+            .withFacility(Facility.USER)
+            .withSeverity(Severity.INFORMATIONAL)
+            .withMsg("a syslog message")
+            .toRfc5424SyslogMessage();
     }
 
-    @Test
+    @Benchmark
+    @Fork(value=1, warmups=1)
+    @Warmup(iterations=1, time=5)
+    @Measurement(iterations=5, time=5)
     public void testBenchmarkInstantTimestamp() {
-        long start = System.nanoTime();
-        int events = 10_000_000;
         Instant time = Instant.now();
-        for(int i=0; i<events; i++) {
-            SyslogMessage message = new SyslogMessage()
-                    .withTimestamp(time)
-                    .withAppName("my_app")
-                    .withHostname("localhost")
-                    .withFacility(Facility.USER)
-                    .withSeverity(Severity.INFORMATIONAL)
-                    .withMsg("a syslog message");
-            String actual = message.toRfc5424SyslogMessage();
-        };
-        long end = System.nanoTime();
-        long elapsed = end - start;
-        printData((double) elapsed / 1_000_000_000, events, "Instant Timestamp");
-    }
-
-    private void printData(double elapsed, int events, String type) {
-        System.out.println("[" + type + "] Took " + elapsed + " seconds to process " + events + " (" + (events/elapsed) + " eps)" );
+        String message = new SyslogMessage()
+            .withTimestamp(time)
+            .withAppName("my_app")
+            .withHostname("localhost")
+            .withFacility(Facility.USER)
+            .withSeverity(Severity.INFORMATIONAL)
+            .withMsg("a syslog message")
+            .toRfc5424SyslogMessage();
     }
 }
