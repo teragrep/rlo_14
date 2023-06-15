@@ -74,8 +74,8 @@ public class SyslogMessage {
         return this;
     }
 
-    public Date getTimestamp() {
-        return timestamp == null ? null : new Date(timestamp);
+    public String getTimestamp() {
+        return timestamp;
     }
 
     public void setTimestamp(Date timestamp) {
