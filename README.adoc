@@ -1,0 +1,96 @@
+= Java RFC5424 Syslog Formatter
+
+== Description
+
+Java RFC5424 formatter library
+
+== Using the Syslog Java Client with Maven
+
+Add the following dependency in your pom.xml:
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.teragrep</groupId>
+    <artifactId>rlo_14</artifactId>
+    <version>1.0.0</version>
+</dependency>
+----
+
+== Usage
+
+Sourcing timestamp from long
+[source,java]
+----
+Instant time = Instant.now();
+SyslogMessage message = new SyslogMessage()
+       .withTimestamp(time.toEpochMilli())
+       .withAppName("my_app")
+       .withHostname("localhost")
+       .withFacility(Facility.USER)
+       .withSeverity(Severity.INFORMATIONAL)
+       .withMsg("a syslog message");
+String actual = message.toRfc5424SyslogMessage();
+----
+
+Sourcing timestamp from Instant
+[source,java]
+----
+Instant time = Instant.now();
+SyslogMessage message = new SyslogMessage()
+       .withTimestamp(time)
+       .withAppName("my_app")
+       .withHostname("localhost")
+       .withFacility(Facility.USER)
+       .withSeverity(Severity.INFORMATIONAL)
+       .withMsg("a syslog message");
+String actual = message.toRfc5424SyslogMessage();
+----
+
+Sourcing timestamp from string (parsed and validated)
+[source,java]
+----
+SyslogMessage message = new SyslogMessage()
+       .withTimestamp("2023-06-14T16:37:00.000Z")
+       .withAppName("my_app")
+       .withHostname("localhost")
+       .withFacility(Facility.USER)
+       .withSeverity(Severity.INFORMATIONAL)
+       .withMsg("a syslog message");
+String actual = message.toRfc5424SyslogMessage();
+----
+
+Sourcing timestamp from string (no validation, useful when you know you have correct format)
+[source,java]
+----
+SyslogMessage message = new SyslogMessage()
+       .withTimestamp("2023-06-14T16:37:00.000Z", true)
+       .withAppName("my_app")
+       .withHostname("localhost")
+       .withFacility(Facility.USER)
+       .withSeverity(Severity.INFORMATIONAL)
+       .withMsg("a syslog message");
+String actual = message.toRfc5424SyslogMessage();
+----
+
+Adding structured data
+
+[source,java]
+----
+SyslogMessage message = new SyslogMessage()
+        .withTimestamp("2023-06-14T16:37:00.000Z")
+        .withAppName("my_app")
+        .withHostname("localhost")
+        .withFacility(Facility.USER)
+        .withSeverity(Severity.INFORMATIONAL)
+        .withMsg("a syslog message")
+        .withSDElement(
+            new SDElement(
+                "event_version@48577",
+                new SDParam("major", "1"),
+                new SDParam("minor", "0"),
+                new SDParam("version_source", "source")
+            )
+        );
+String actual = message.toRfc5424SyslogMessage();
+----

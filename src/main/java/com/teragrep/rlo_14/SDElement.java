@@ -1,5 +1,6 @@
 /*
  * Copyright 2010-2014, CloudBees Inc.
+ * Copyright 2023, Suomen Kanuuna Oy
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cloudbees.syslog;
+package com.teragrep.rlo_14;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -121,6 +122,9 @@ public class SDElement implements Serializable {
     private void validateSDID(String sdName) {
         if (null == sdName) {
             throw new IllegalArgumentException("SD-ID cannot be null");
+        }
+        if (sdName.isEmpty()) {
+            throw new IllegalArgumentException("SD-ID cannot be empty");
         }
         if (sdName.length() > 32) {
             throw new IllegalArgumentException("SD-ID must be less than 32 characters: " + sdName);

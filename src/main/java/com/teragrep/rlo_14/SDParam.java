@@ -1,5 +1,6 @@
 /*
  * Copyright 2010-2014, CloudBees Inc.
+ * Copyright 2023, Suomen Kanuuna Oy.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cloudbees.syslog;
+package com.teragrep.rlo_14;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,6 +22,7 @@ import java.util.Objects;
 /**
  *
  * @author <a href="mailto:brett@thebergquistfamily.com">Brett Bergquist</a>
+ * @author <a href="mailto:9@teragrep.com">StrongestNumber9</a>
  */
 public class SDParam implements Serializable {
 
@@ -76,6 +78,9 @@ public class SDParam implements Serializable {
     private void validateParamName(String sdName) {
         if (null == sdName) {
             throw new IllegalArgumentException("PARAM-NAME cannot be null");
+        }
+        if(sdName.isEmpty()) {
+            throw new IllegalArgumentException("PARAM-NAME cannot be empty");
         }
         if (sdName.length() > 32) {
             throw new IllegalArgumentException("PARAM-NAME must be less than 32 characters: " + sdName); 
