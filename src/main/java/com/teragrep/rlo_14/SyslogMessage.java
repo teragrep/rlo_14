@@ -79,7 +79,7 @@ public class SyslogMessage {
     }
 
     public void setTimestamp(Date timestamp) {
-        this.timestamp = rfc3339Formatter.format(timestamp == null ? new Date() : new Date(timestamp.getTime()));
+        this.timestamp = rfc3339Formatter.format(timestamp);
     }
 
     public SyslogMessage withTimestamp(long timestamp) {
@@ -88,7 +88,7 @@ public class SyslogMessage {
     }
 
     public SyslogMessage withTimestamp(Date timestamp) {
-        this.timestamp = rfc3339Formatter.format(timestamp == null ? new Date() : new Date(timestamp.getTime()));
+        this.timestamp = rfc3339Formatter.format(timestamp);
         return this;
     }
 
