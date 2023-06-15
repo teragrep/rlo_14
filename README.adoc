@@ -22,11 +22,9 @@ Add the following dependency in your pom.xml:
 Sourcing timestamp from long
 [source,java]
 ----
-Calendar cal = Calendar.getInstance();
-cal.set(2013, Calendar.DECEMBER, 5, 10, 30, 5);
-cal.set(Calendar.MILLISECOND, 0);
+Instant time = Instant.now();
 SyslogMessage message = new SyslogMessage()
-       .withTimestamp(cal.getTimeInMillis())
+       .withTimestamp(time.toEpochMilli())
        .withAppName("my_app")
        .withHostname("localhost")
        .withFacility(Facility.USER)
@@ -35,14 +33,12 @@ SyslogMessage message = new SyslogMessage()
 String actual = message.toRfc5424SyslogMessage();
 ----
 
-Sourcing timestamp from Date
+Sourcing timestamp from Instant
 [source,java]
 ----
-Calendar cal = Calendar.getInstance();
-cal.set(2013, Calendar.DECEMBER, 5, 10, 30, 5);
-cal.set(Calendar.MILLISECOND, 0);
+Instant time = Instant.now();
 SyslogMessage message = new SyslogMessage()
-        .withTimestamp(cal.getTime())
+       .withTimestamp(time)
        .withAppName("my_app")
        .withHostname("localhost")
        .withFacility(Facility.USER)
@@ -51,14 +47,24 @@ SyslogMessage message = new SyslogMessage()
 String actual = message.toRfc5424SyslogMessage();
 ----
 
-Sourcing timestamp (passing it as-is) from string
+Sourcing timestamp from string (parsed and validated)
 [source,java]
 ----
-Calendar cal = Calendar.getInstance();
-cal.set(2013, Calendar.DECEMBER, 5, 10, 30, 5);
-cal.set(Calendar.MILLISECOND, 0);
 SyslogMessage message = new SyslogMessage()
        .withTimestamp("2023-06-14T16:37:00.000Z")
+       .withAppName("my_app")
+       .withHostname("localhost")
+       .withFacility(Facility.USER)
+       .withSeverity(Severity.INFORMATIONAL)
+       .withMsg("a syslog message");
+String actual = message.toRfc5424SyslogMessage();
+----
+
+Sourcing timestamp from string (no validation, useful when you know you have correct format)
+[source,java]
+----
+SyslogMessage message = new SyslogMessage()
+       .withTimestamp("2023-06-14T16:37:00.000Z", true)
        .withAppName("my_app")
        .withHostname("localhost")
        .withFacility(Facility.USER)
@@ -79,12 +85,12 @@ SyslogMessage message = new SyslogMessage()
         .withSeverity(Severity.INFORMATIONAL)
         .withMsg("a syslog message")
         .withSDElement(
-                new SDElement(
-                        "exampleSDID@32473",
-                        new SDParam("iut", "3"),
-                        new SDParam("eventSource", "Application"),
-                        new SDParam("eventID", "1011")
-                )
+            new SDElement(
+                "event_version@48577",
+                new SDParam("major", "1"),
+                new SDParam("minor", "0"),
+                new SDParam("version_source", "source")
+            )
         );
 String actual = message.toRfc5424SyslogMessage();
 ----
