@@ -1,5 +1,6 @@
 /*
  * Copyright 2010-2014, CloudBees Inc.
+ * Copyright 2023, Suomen Kanuuna Oy
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +24,7 @@ import java.util.Map;
  * Syslog severity as defined in <a href="https://tools.ietf.org/html/rfc5424">RFC 5424 - The Syslog Protocol</a>.
  *
  * @author <a href="mailto:cleclerc@cloudbees.com">Cyrille Le Clerc</a>
+ * @author <a href="mailto:9@teragrep.com">StrongestNumber9</a>
  */
 public enum Severity {
     /**
