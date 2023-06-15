@@ -45,6 +45,10 @@
       <name>Cyrille Le Clerc</name>
       <email>cleclerc@cloudbees.com</email>
     </developer>
+    <developer>
+      <name>StrongestNumber9</name>
+      <email>9@teragrep.com</email>
+    </developer>
   </developers>
   <scm>
     <connection>scm:git:git://github.com/teragrep/rlo_14.git</connection>

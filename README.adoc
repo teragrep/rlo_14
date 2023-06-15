@@ -1,4 +1,4 @@
-= Syslog Java Client
+= Java RFC5424 Syslog Formatter
 
 == Description
 
