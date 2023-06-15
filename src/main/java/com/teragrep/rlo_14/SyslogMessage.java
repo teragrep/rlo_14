@@ -34,8 +34,8 @@ public class SyslogMessage {
 
     private Facility facility;
     private Severity severity;
-    private String timestamp;
-    private String hostname;
+    private String timestamp = NILVALUE;
+    private String hostname = NILVALUE;
     private String appName = NILVALUE;
     private String procId = NILVALUE;
     private String msgId = NILVALUE;
@@ -218,11 +218,16 @@ public class SyslogMessage {
      * <a href="https://tools.ietf.org/html/rfc5424#section-6.2.1">RFC-5424, Section 6.2.1</a>
      */
     public void toRfc5424SyslogMessage(StringBuilder out) throws IOException {
-
+        if(facility == null) {
+            throw new IllegalArgumentException("Facility must be set before constructing a message.");
+        }
+        if(severity == null) {
+            throw new IllegalArgumentException("Severity must be set before constructing a message");
+        }
         int pri = facility.numericalCode() * 8 + severity.numericalCode();
 
         out.append('<');
-        out.append(String.valueOf(pri));
+        out.append(pri);
         out.append('>');
         out.append('1'); // version
         out.append(SP);
