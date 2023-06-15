@@ -178,7 +178,7 @@ public class SyslogMessage {
     public Set<SDElement> getSDElements() {
         Set<SDElement> ssde = sdElements;
         if (ssde == null) {
-            ssde = new HashSet<>(0);
+            ssde = new LinkedHashSet<>(0);
         }
         return ssde;
     }
