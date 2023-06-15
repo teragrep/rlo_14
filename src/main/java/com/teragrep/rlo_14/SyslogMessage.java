@@ -16,8 +16,6 @@
 package com.teragrep.rlo_14;
 import java.io.CharArrayWriter;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -48,7 +46,7 @@ public class SyslogMessage {
      * Use a {@link java.io.CharArrayWriter} instead of a {@link String}  or a {@code char[]} because middlewares like
      * Apache Tomcat use {@code CharArrayWriter} and it's convenient for pooling objects.
      */
-    private CharArrayWriter msg;
+    private String msg;
 
     public Facility getFacility() {
         return facility;
@@ -151,25 +149,17 @@ public class SyslogMessage {
         return this;
     }
 
-    public CharArrayWriter getMsg() {
+    public String getMsg() {
         return msg;
     }
 
-    public void setMsg(CharArrayWriter msg) {
+    public void setMsg(String msg) {
         this.msg = msg;
     }
 
-    public SyslogMessage withMsg(CharArrayWriter msg) {
+    public SyslogMessage withMsg(String msg) {
         this.msg = msg;
         return this;
-    }
-
-    public SyslogMessage withMsg(final String msg) {
-        return withMsg(new CharArrayWriter() {
-            {
-                append(msg);
-            }
-        });
     }
     
     public Set<SDElement> getSDElements() {
@@ -197,7 +187,7 @@ public class SyslogMessage {
      */
     public String toRfc5424SyslogMessage() {
 
-        StringWriter sw = new StringWriter(msg == null ? 32 : msg.size() + 32);
+        StringBuilder sw = new StringBuilder();
         try {
             toRfc5424SyslogMessage(sw);
         } catch (IOException e) {
@@ -212,60 +202,53 @@ public class SyslogMessage {
      * The priority is calculated by facility * 8 + severity, see
      * <a href="https://tools.ietf.org/html/rfc5424#section-6.2.1">RFC-5424, Section 6.2.1</a>
      */
-    public void toRfc5424SyslogMessage(Writer out) throws IOException {
+    public void toRfc5424SyslogMessage(StringBuilder out) throws IOException {
 
         int pri = facility.numericalCode() * 8 + severity.numericalCode();
 
-        out.write('<');
-        out.write(String.valueOf(pri));
-        out.write('>');
-        out.write('1'); // version
-        out.write(SP);
-        out.write(timestamp); // message time
-        out.write(SP);
-        out.write(hostname); // emitting server hostname
-        out.write(SP);
-        out.write(appName);
-        out.write(SP);
-        out.write(procId);
-        out.write(SP);
-        out.write(msgId);
-        out.write(SP);
-        writeStructuredDataOrNillableValue(sdElements, out);
+        out.append('<');
+        out.append(String.valueOf(pri));
+        out.append('>');
+        out.append('1'); // version
+        out.append(SP);
+        out.append(timestamp); // message time
+        out.append(SP);
+        out.append(hostname); // emitting server hostname
+        out.append(SP);
+        out.append(appName);
+        out.append(SP);
+        out.append(procId);
+        out.append(SP);
+        out.append(msgId);
+        out.append(SP);
+        if(sdElements == null || sdElements.isEmpty()) {
+            out.append(NILVALUE);
+        }
+        else {
+            writeSDElements(out);
+        }
         if (msg != null) {
-            out.write(SP);
-            msg.writeTo(out);
+            out.append(SP);
+            out.append(msg);
         }
     }
-    
-    protected void writeStructuredDataOrNillableValue(Set<SDElement> ssde, Writer out) throws IOException {
-        if (ssde == null || ssde.isEmpty()) {
-            out.write(NILVALUE);
-        } else {
-            for (SDElement sde : ssde) {
-                writeSDElement(sde, out);
+
+    protected void writeSDElements(StringBuilder out) throws IOException {
+        for (SDElement sde : sdElements) {
+            out.append("[");
+            out.append(sde.getSdID());
+            for (SDParam sdp : sde.getSdParams()) {
+                out.append(SP);
+                out.append(sdp.getParamName());
+                out.append('=');
+                out.append('"');
+                out.append(getEscapedParamValue(sdp.getParamValue()));
+                out.append('"');
             }
+            out.append("]");
         }
     }
-    
-    protected void writeSDElement(SDElement sde, Writer out) throws IOException {
-        out.write("[");
-        out.write(sde.getSdID());
-        for (SDParam sdp : sde.getSdParams()) {
-            writeSDParam(sdp, out);
-        }
-        out.write("]");
-    }
-    
-    protected void writeSDParam(SDParam sdp, Writer out) throws IOException {
-        out.write(SP);
-        out.write(sdp.getParamName());
-        out.write('=');
-        out.write('"');
-        out.write(getEscapedParamValue(sdp.getParamValue()));
-        out.write('"');
-    }
-    
+
     protected String getEscapedParamValue(String paramValue) {
         StringBuilder sb = new StringBuilder(paramValue.length());
         
