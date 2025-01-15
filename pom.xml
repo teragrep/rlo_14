@@ -22,7 +22,7 @@
   <version>${revision}${sha1}${changelist}</version>
   <packaging>jar</packaging>
   <name>rlo_14</name>
-  <description>Syslog Java Client</description>
+  <description>Syslog (RFC 5424) formatter for Java</description>
   <url>https://github.com/teragrep/rlo_14/</url>
   <inceptionYear>2014</inceptionYear>
   <properties>
