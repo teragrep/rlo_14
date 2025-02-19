@@ -111,14 +111,17 @@
             <exclude>.gitignore</exclude>
             <exclude>.gitmodules</exclude>
             <!-- ci -->
-            <exclude>.github/workflows/*.yml</exclude>
-            <exclude>.github/workflows/*.yaml</exclude>
+            <exclude>.github/workflows/*</exclude>
+            <exclude>.github/ISSUE_TEMPLATE/*</exclude>
+            <exclude>.github/PULL_REQUEST_TEMPLATE/*</exclude>
             <exclude>toolchains.xml</exclude>
             <exclude>settings.xml</exclude>
+            <!-- maven -->
+            <exclude>pom.xml</exclude>
+            <exclude>eclipse-java-formatter.xml</exclude>
             <exclude>rpm/rpm.pom.xml</exclude>
             <!-- readme -->
             <exclude>README.adoc</exclude>
-            <exclude>README.md</exclude>
           </excludes>
         </configuration>
       </plugin>
